@@ -1,4 +1,6 @@
 import "../styles/style.css";
+import Presents from "./Present";
+import Absents from "./Absent";
 function Allstudent(props) {
   // Edit students Name
   const editHandle = (e) => {
@@ -47,54 +49,74 @@ function Allstudent(props) {
     //   console.log("no");
     // }
   };
+  // Toogle Handelar
+  const toogleStudent = (student) => {
+    let findPresentStudent = props.students.find(
+      (item) => item.id === student.id
+    );
+    findPresentStudent.isPresent = !findPresentStudent.isPresent;
+    props.setStudents([...props.students]);
+  };
   return (
-    <div className="allStudents">
-      <h3>ALL STUDENTS</h3>
-      <input
-        type="text"
-        placeholder="Search Student"
-        value={props.serachVal}
-        onChange={(e) => {
-          search(e.target.value);
-        }}
+    <div className="main">
+      <div className="allStudents">
+        <h3>ALL STUDENTS</h3>
+        <input
+          type="text"
+          placeholder="Search Student"
+          value={props.serachVal}
+          onChange={(e) => {
+            search(e.target.value);
+          }}
+        />
+        <ul>
+          {props.students.map((student) => {
+            return (
+              <li key={student.id}>
+                <span> Name: {student.name}</span>
+                <button
+                  onClick={(e) => {
+                    editHandle(student);
+                  }}
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={(e) => {
+                    deleteStudent(student);
+                  }}
+                >
+                  Delete
+                </button>
+                <button
+                  onClick={(e) => {
+                    present(student);
+                  }}
+                >
+                  Present
+                </button>
+                <button
+                  onClick={(e) => {
+                    Absent(student);
+                  }}
+                >
+                  Absent
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      <Presents
+        students={props.students}
+        setStudents={props.setStudents}
+        toogleStudent={toogleStudent}
       />
-      <ul>
-        {props.students.map((student) => {
-          return (
-            <li key={student.id}>
-              <span> Name: {student.name}</span>
-              <button
-                onClick={(e) => {
-                  editHandle(student);
-                }}
-              >
-                Edit
-              </button>
-              <button
-                onClick={(e) => {
-                  deleteStudent(student);
-                }}
-              >
-                Delete
-              </button>
-              <button
-                onClick={(e) => {
-                  present(student);
-                }}
-              >
-                Present
-              </button>
-              <button
-                onClick={(e) => {
-                  Absent(student);
-                }}
-              >
-                Absent
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+      <Absents
+        students={props.students}
+        setStudents={props.setStudents}
+        toogleStudent={toogleStudent}
+      />
     </div>
   );
 }

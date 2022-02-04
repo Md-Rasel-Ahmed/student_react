@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Allstudent from "./Component/Allstudent";
 import Input from "./Component/Input";
-import Present from "./Component/Present";
-import Absent from "./Component/Absent";
+// import Present from "./Component/Present";
+// import Absent from "./Component/Absent";
 // style
 import "./styles/style.css";
 function App() {
@@ -41,8 +41,6 @@ function App() {
           />
         </div>
       </div>
-      <Present students={students} setStudents={setStudents} />
-      <Absent students={students} setStudents={setStudents} />
     </div>
   );
 }

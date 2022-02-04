@@ -1,15 +1,7 @@
 function Absent(props) {
-  // Absent to Present Student checking
-  const absentToPresent = (student) => {
-    let findPresentStudent = props.students.find(
-      (item) => item.id === student.id
-    );
-    findPresentStudent.isPresent = !findPresentStudent.isPresent;
-    props.setStudents([...props.students]);
-  };
   return (
     <div className="absent">
-      <h2>Absent Student</h2>
+      <h3>ABSENT STUDENS</h3>
       <ul>
         {props.students
           .filter((student) => student.isPresent === false)
@@ -19,7 +11,7 @@ function Absent(props) {
                 <span>Name :{student.name}</span>
                 <button
                   onClick={() => {
-                    absentToPresent(student);
+                    props.toogleStudent(student);
                   }}
                 >
                   Present
